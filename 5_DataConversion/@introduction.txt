@@ -1,0 +1,73 @@
+Data Type Conversions
+Kenneth Leroy Busbee and Dave Braunschweig
+
+Overview
+Changing a data type of a value is referred to as “type conversion”.  There are two ways to do this:
+
+Implicit – the change is implied
+Explicit – the change is explicitly done with an operator or function
+The value being changed may be:
+
+Promotion – going from a smaller domain to a larger domain
+Demotion – going from a larger domain to a smaller domain
+Discussion
+Implicit Type Conversion
+Automatic conversion of a value from one data type to another by a programming language, without the programmer specifically doing so, is called implicit type conversion.  It happens whenever a binary operator has two operands of different data types. Depending on the operator, one of the operands is going to be converted to the data type of the other. It could be promoted or demoted depending on the operator.
+
+Implicit Promotion
+
+55 + 1.75
+In this example, the integer value 55 is converted to a floating-point value (most likely double) of 55.0. It was promoted.
+
+Implicit Demotion
+
+In programming languages that have explicit integer data types (C++, C#, Java), care must be taken to avoid implicit demotion. For example:
+
+int money;
+money = 23.16;
+
+In this example, the variable money is an integer. We are trying to move a floating-point value 23.16 into an integer storage location. This is demotion and the floating-point value usually gets truncated to 23.
+
+Promotion
+Promotion is never a problem because the lower data type (smaller range of allowable values) is a subset of the higher data type (larger range of allowable values).  Promotion often occurs with three of the standard data types: character, integer, and floating-point. The allowable values (or domains) progress from one type to another.  That is, the character data type values are a subset of integer values and integer values are a subset of floating-point values; and within the floating-point values, float values are a subset of double.  Even though character data represent the alphabetic letters, numeral digits (0 to 9) and other symbols (a period, $, comma, etc.) their bit pattern also represent integer values from 0 to 255.  This progression allows us to promote them up the chain from character to integer to float to double.
+
+Demotion
+Demotion represents a potential problem with truncation or unpredictable results often occurring.  How do you fit an integer value of 456 into a character value?  How do you fit the floating-point value of 45656.453 into an integer value? Most compilers give a warning if it detects demotion happening. A compiler warning does not stop the compilation process. It does warn the programmer to check to see if the demotion is reasonable.
+
+If I calculate the number of cans of soup to buy based on the number of people I am serving (say 8) and the servings per can (say 2.3), I would need 18.4 cans. I might want to demote the 18.4 into an integer. It would truncate the 18.4 into 18 and because the value 18 is within the domain of an integer data type, it should demote with the truncation side effect.
+
+If I tried demoting a double that contained the number of stars in the Milky Way galaxy into an integer, I might have a get an unpredictable result (assuming the number of stars is larger than allowable values within the integer domain).
+
+Explicit Type Conversion
+Most languages have a method for the programmer to change or cast a value from one data type to another; called explicit type conversion. Some languages support a cast operator. The cast operator is a unary operator; it only has one operand and the operand is to the right of the operator. The operator is a set of parentheses surrounding the new data type. Other languages have functions that perform explicit type conversion. In each of the following examples, the expression value would be 3.
+
+Language	Floating-Point to Integer Type Conversion Example
+C++	(int) 3.14
+C#	Convert.ToInt32(3.14)
+Java	Math.floor(3.14)
+JavaScript	Math.floor(3.14)
+Python	int(3.14)
+Swift	Int(3.14)
+In each of the following examples, the expression value would be 3.14.
+
+Language	String to Floating-Point Type Conversion Example
+C++	#include <string.h>
+std::stod("3.14")
+C#	Convert.ToDouble("3.14")
+Java	Double.parseDouble("3.14")
+JavaScript	parseFloat("3.14")
+Python	float("3.14")
+Swift	Double("3.14")
+Key Terms
+demotion
+Going from a larger domain to a smaller domain.
+explicit
+Changing a value’s data type with the cast operator.
+implicit
+A value that has its data type changed automatically.
+promotion
+Going from a smaller domain to a larger domain.
+truncation
+The fractional part of a floating-point data type that is dropped when converted to an integer.
+
+Source: https://press.rebus.community/programmingfundamentals/chapter/data-type-conversions/
